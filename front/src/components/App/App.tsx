@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import type IRecipe from "../../@types/recipes";
 import axios from "axios";
 import { Routes, Route } from "react-router";
+import { useUserContext } from "../../context/userContext";
+import FavRecipesPage from "../../pages/FavRecipesPage";
 
 function App() {
   const [recipes, setRecipesList] = useState<IRecipe[]>([]);
@@ -30,6 +32,9 @@ function App() {
     fetchRecipes();
   }, []);
 
+  // récuper isLogged dans le context
+  const { isLogged } = useUserContext();
+
   return (
     <div className="app-container">
       <Menu recipes={recipes} />
@@ -41,6 +46,9 @@ function App() {
               path="/"
               element={<Recipes recipes={recipes} isLoading={isLoading} />}
             />
+            {isLogged && (
+              <Route path="/favorites" element={<FavRecipesPage />} />
+            )}
             <Route
               path="/recipes/:slug"
               element={<RecipePage isLoading={isLoading} />}
