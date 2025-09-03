@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+input {
+  height: 2rem;
+  border: 1px solid #042031;
+  padding: 0 0.5rem;
+  border-radius: 3px;
+}
