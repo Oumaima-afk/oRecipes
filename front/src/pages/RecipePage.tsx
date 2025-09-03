@@ -42,11 +42,11 @@ export default function RecipePage() {
     <div>
       <div className="recipe-container">
         <img
-          className="article-img"
+          className="recipe-page-img"
           src={recipe.thumbnail}
           alt={recipe.thumbnail}
         />
-        <h3 className="article-title">{recipe.title}</h3>
+        <h3 className="recipe-page-title">{recipe.title}</h3>
         <p className="recipe-infos">
           {recipe.author} - {recipe.difficulty}
         </p>

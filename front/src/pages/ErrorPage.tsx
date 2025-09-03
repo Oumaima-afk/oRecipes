@@ -1,5 +1,4 @@
 import "./ErrorPage.css";
-import { Link } from "react-router";
 
 export default function ErrorPage() {
   return (
@@ -10,9 +9,6 @@ export default function ErrorPage() {
         <p className="error-page-message">
           Oups ! Il semble que la page que vous cherchez n'existe pas...
         </p>
-        <Link to="/" className="error-page-button">
-          Retour à l'accueil
-        </Link>
       </div>
     </main>
   );

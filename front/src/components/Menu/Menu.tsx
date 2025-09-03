@@ -12,7 +12,7 @@ export default function Menu({ recipes }: IRecipes) {
     <div className="menu">
       <ul className="menu-list">
         <li className="menu-list-item">
-          <a href="">Accueil</a>
+          <NavLink to="/">Accueil</NavLink>
         </li>
         {recipes.map((recipe) => (
           <li key={recipe.id} className="menu-list-item">

@@ -1,27 +1,125 @@
-body {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin: 0;
+.recipe-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.recipe-page-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.1);
+}
+
+.recipe-page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.recipe-infos {
+  font-size: 1rem;
+  color: #27ae60;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  background: rgba(39, 174, 96, 0.1);
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.ingredients {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid #ecf0f1;
+}
+
+.ingredients h4 {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.ingredients-list {
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
 }
 
-.app-container {
+.ingredients-list-item {
   display: flex;
-  min-height: 100vh;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background: #d9dfe1;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
 }
 
-.recipes {
+.ingredient-quantity {
+  font-weight: 700;
+  color: #2c3e50;
+  min-width: 35px;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.ingredient-unit {
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  min-width: 40px;
+  margin: 0;
+}
+
+.ingredient-name {
+  color: #2c3e50;
+  font-weight: 500;
+  margin: 0;
   flex: 1;
-  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.instructions-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #ecf0f1;
+  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.08);
+}
+
+.instructions-container h4 {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.instructions {
+  color: #2c3e50;
+  line-height: 1.6;
+  white-space: pre-line;
+  margin: 0;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid #fff;
-  border-bottom-color: #ff3d00;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ecf0f1;
+  border-bottom-color: #27ae60;
   border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
+  margin: 1rem auto;
+  display: block;
   animation: rotation 1s linear infinite;
 }
 

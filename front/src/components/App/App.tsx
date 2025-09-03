@@ -1,14 +1,14 @@
 import "./reset.css";
 import "./App.css";
-
 import Menu from "../Menu/Menu";
 import Header from "../Header/Header";
 import Recipes from "../Recipes/Recipes";
+import ErrorPage from "../../pages/ErrorPage";
+import RecipePage from "../../pages/RecipePage";
 import { useState, useEffect } from "react";
-
 import type IRecipe from "../../@types/recipes";
-
 import axios from "axios";
+import { Routes, Route } from "react-router";
 
 function App() {
   const [recipes, setRecipesList] = useState<IRecipe[]>([]);
@@ -36,7 +36,14 @@ function App() {
       <div className="recipes">
         <div className="recipes-container">
           <Header />
-          <Recipes recipes={recipes} isLoading={isLoading} />
+          <Routes>
+            <Route
+              path="/"
+              element={<Recipes recipes={recipes} isLoading={isLoading} />}
+            />
+            <Route path="/recipes/:slug" element={<RecipePage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
         </div>
       </div>
     </div>
