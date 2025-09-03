@@ -55,8 +55,9 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
           <ul className="ingredients-list">
             {recipe.ingredients.map((ingredient) => (
               <li key={ingredient.id} className="ingredients-list-item">
-                <p className="ingredient-quantity">{ingredient.quantity}</p>
-                <p className="ingredient-unit">{ingredient.unit}</p>
+                <p className="ingredient-quantity">
+                  {ingredient.quantity} {ingredient.unit}
+                </p>
                 <p className="ingredient-name">{ingredient.name}</p>
               </li>
             ))}

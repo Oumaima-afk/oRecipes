@@ -2,7 +2,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 0;
+  padding-bottom: 2rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid #ecf0f1;
 }
@@ -23,15 +23,15 @@ form {
   gap: 1.2rem;
   align-items: center;
   background: #ffffff;
-  padding: 1.2rem 1.8rem;
+  padding: 0.7rem 1rem;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(44, 62, 80, 0.1);
-  border: 1px solid #ecf0f1;
+  border: 1px solid #c0c3c3;
 }
 
 input {
   height: 3rem;
-  border: 2px solid #ecf0f1;
+  border: 2px solid #a1a4a4;
   padding: 0 1.2rem;
   border-radius: 12px;
   font-size: 0.95rem;
