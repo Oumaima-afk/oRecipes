@@ -1,5 +1,6 @@
 import "./Recipes.css";
 import type IRecipe from "../../@types/recipes";
+import { useNavigate } from "react-router";
 
 interface IRecipes {
   recipes: IRecipe[];
@@ -7,6 +8,8 @@ interface IRecipes {
 }
 
 export default function Recipes({ recipes, isLoading }: IRecipes) {
+  const navigate = useNavigate();
+
   return (
     <div className="articles">
       <h1 className="title">Les recettes oRecipes</h1>
@@ -23,7 +26,12 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
             />
             <h3 className="article-title">{recipe.title}</h3>
             <p className="article-level">Difficulté : {recipe.difficulty}</p>
-            <button className="article-show-btn">Voir la recette</button>
+            <button
+              className="article-show-btn"
+              onClick={() => navigate(`/recipes/${recipe.slug}`)}
+            >
+              Voir la recette
+            </button>
           </article>
         ))}
       </div>

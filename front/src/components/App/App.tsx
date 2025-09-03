@@ -41,7 +41,10 @@ function App() {
               path="/"
               element={<Recipes recipes={recipes} isLoading={isLoading} />}
             />
-            <Route path="/recipes/:slug" element={<RecipePage />} />
+            <Route
+              path="/recipes/:slug"
+              element={<RecipePage isLoading={isLoading} />}
+            />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>

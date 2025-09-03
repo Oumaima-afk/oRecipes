@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import type IRecipe from "../@types/recipes";
 
-export default function RecipePage() {
+export default function RecipePage({ isLoading }: { isLoading: boolean }) {
   const params = useParams();
   const slug = params.slug;
   console.log(slug);
@@ -40,6 +40,7 @@ export default function RecipePage() {
 
   return (
     <div>
+      {isLoading && <div className="loader"></div>}
       <div className="recipe-container">
         <img
           className="recipe-page-img"
