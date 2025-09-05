@@ -23,6 +23,9 @@
   transition: all 0.2s ease;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 
 .menu-list-item:hover {
@@ -50,4 +53,9 @@
 .menu-list-item .active {
   color: #1abc9c;
   font-weight: 600;
+}
+
+.save-icon {
+  width: 20px;
+  color: #ffffff;
 }

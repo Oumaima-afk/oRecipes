@@ -1,16 +1,19 @@
 import "./reset.css";
 import "./App.css";
+
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router";
+
+import axios from "axios";
+
 import Menu from "../Menu/Menu";
 import Header from "../Header/Header";
 import Recipes from "../Recipes/Recipes";
 import ErrorPage from "../../pages/ErrorPage";
 import RecipePage from "../../pages/RecipePage";
-import { useState, useEffect } from "react";
-import type IRecipe from "../../@types/recipes";
-import axios from "axios";
-import { Routes, Route } from "react-router";
-import { useUserContext } from "../../context/userContext";
 import FavRecipesPage from "../../pages/FavRecipesPage";
+import type IRecipe from "../../@types/recipes";
+import { useUserContext } from "../../context/userContext";
 
 function App() {
   const [recipes, setRecipesList] = useState<IRecipe[]>([]);
