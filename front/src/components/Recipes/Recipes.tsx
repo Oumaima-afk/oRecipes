@@ -77,8 +77,7 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
 
   return (
     <div className="articles">
-      <h1 className="title">Les recettes oRecipes</h1>
-      <h2 className="subtitle">Voici nos {recipes.length} recettes</h2>
+      <h1 className="title">Découvrez nos recettes</h1>
 
       <div className="article-container">
         {isLoading && <div className="loader"></div>}

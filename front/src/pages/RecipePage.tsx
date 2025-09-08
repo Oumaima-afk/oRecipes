@@ -10,11 +10,11 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
   console.log("Recipe slug : ", recipeId);
 
   const [recipe, setRecipe] = useState<null | IRecipe>(null);
+  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [measures, setMeasures] = useState<string[]>([]);
 
   useEffect(() => {
     if (!recipeId) return;
-
-    console.log("recipepage");
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
@@ -22,12 +22,26 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
         );
         const recipeFromAPI = response.data.meals[0];
         setRecipe(recipeFromAPI);
-        console.log(recipeFromAPI);
+
+        Object.keys(recipeFromAPI).forEach((key) => {
+          if (key.includes("strIngredient") && recipeFromAPI[key] !== "") {
+            setIngredients((prev) => {
+              if (prev.length === 0) return [recipeFromAPI[key]];
+              else return [...prev, recipeFromAPI[key]];
+            });
+          }
+
+          if (key.includes("strMeasure") && recipeFromAPI[key] !== "") {
+            setMeasures((prev) => {
+              if (prev.length === 0) return [recipeFromAPI[key]];
+              else return [...prev, recipeFromAPI[key]];
+            });
+          }
+        });
       } catch (erreur) {
         console.log("Erreur, la recette n'a pas pu être récupéré...");
       }
     };
-
     fetchRecipe();
   }, [recipeId]);
 
@@ -52,8 +66,14 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
         <h3 className="recipe-page-title">{recipe.strMeal}</h3>
 
         <div className="ingredients">
-          <ul className="ingredients-list">{recipe.strInstructions}</ul>
+          {ingredients.map((ingredient, index) => (
+            <div key={ingredient} className="ingredient">
+              <span className="measures">{measures[index]}</span>{" "}
+              <span className="ingredient-list">{ingredient}</span>
+            </div>
+          ))}
         </div>
+        <div className="instructions">{recipe.strInstructions}</div>
       </div>
     </div>
   );
