@@ -58,21 +58,23 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
     <div>
       {isLoading && <div className="loader"></div>}
       <div className="recipe-container">
-        <img
-          className="recipe-page-img"
-          src={recipe.strMealThumb}
-          alt={recipe.strMeal}
-        />
         <h3 className="recipe-page-title">{recipe.strMeal}</h3>
-
-        <div className="ingredients">
-          {ingredients.map((ingredient, index) => (
-            <div key={ingredient} className="ingredient">
-              <span className="measures">{measures[index]}</span>{" "}
-              <span className="ingredient-list">{ingredient}</span>
-            </div>
-          ))}
+        <div className="recipe-page-img-ing">
+          <img
+            className="recipe-page-img"
+            src={recipe.strMealThumb}
+            alt={recipe.strMeal}
+          />
+          <div className="ingredients">
+            {ingredients.map((ingredient, index) => (
+              <div key={ingredient} className="ingredient">
+                <span className="measures">{measures[index]}</span>{" "}
+                <span className="ingredient-list">{ingredient}</span>
+              </div>
+            ))}
+          </div>
         </div>
+
         <div className="instructions">{recipe.strInstructions}</div>
       </div>
     </div>
