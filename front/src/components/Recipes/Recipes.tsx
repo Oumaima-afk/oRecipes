@@ -28,10 +28,10 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
               Authorization: `Bearer ${token}`,
             },
           });
-          const favoriteSlugs = response.data.favorites.map(
-            (fav: IRecipe) => fav.slug
+          const favoriteIds = response.data.favorites.map(
+            (fav: IRecipe) => fav.idMeal
           );
-          setFavorites(new Set(favoriteSlugs));
+          setFavorites(new Set(favoriteIds));
         } catch (error) {
           console.log("Erreur lors du fetch");
         }
@@ -45,30 +45,30 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
     if (!isLogged || !token) return;
 
     try {
-      if (favorites.has(recipe.slug)) {
+      if (favorites.has(recipe.idMeal)) {
         // retirer des favoris
-        await axiosInstance.delete(`/favorites/${recipe.slug}`, {
+        await axiosInstance.delete(`/favorites/${recipe.idMeal}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setFavorites((prev) => {
           const newFavorites = new Set(prev);
-          newFavorites.delete(recipe.slug);
+          newFavorites.delete(recipe.idMeal);
           return newFavorites;
         });
       } else {
         // ajouter aux favoris
         await axiosInstance.post(
-          `/favorites/${recipe.slug}`,
-          {},
+          `/favorites/${recipe.idMeal}`,
+          { recipeId: recipe.idMeal },
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setFavorites((prev) => new Set(prev).add(recipe.slug));
+        setFavorites((prev) => new Set(prev).add(recipe.idMeal));
       }
     } catch (error) {
       console.log("Erreur lors de la modification des favoris", error);
@@ -83,21 +83,20 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
       <div className="article-container">
         {isLoading && <div className="loader"></div>}
         {recipes.map((recipe) => (
-          <article key={recipe.slug}>
+          <article key={recipe.idMeal}>
             <img
               className="article-img"
-              src={recipe.thumbnail}
-              alt={recipe.title}
+              src={recipe.strMealThumb}
+              alt={recipe.strMeal}
             />
-            <h3 className="article-title">{recipe.title}</h3>
-            <p className="article-level">Difficulté : {recipe.difficulty}</p>
+            <h3 className="article-title">{recipe.strMeal}</h3>
 
             {isLogged && (
               <img
                 className="save-button"
-                src={favorites.has(recipe.slug) ? redHeart : blackHeart}
+                src={favorites.has(recipe.idMeal) ? redHeart : blackHeart}
                 alt={
-                  favorites.has(recipe.slug)
+                  favorites.has(recipe.idMeal)
                     ? "Retirer des favoris"
                     : "Ajouter aux favoris"
                 }
@@ -108,7 +107,7 @@ export default function Recipes({ recipes, isLoading }: IRecipes) {
 
             <button
               className="article-show-btn"
-              onClick={() => navigate(`/recipes/${recipe.slug}`)}
+              onClick={() => navigate(`/recipes/${recipe.idMeal}`)}
             >
               Voir la recette
             </button>

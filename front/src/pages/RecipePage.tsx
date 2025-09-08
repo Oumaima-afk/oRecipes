@@ -6,19 +6,21 @@ import type IRecipe from "../@types/recipes";
 
 export default function RecipePage({ isLoading }: { isLoading: boolean }) {
   const params = useParams();
-  const slug = params.slug;
-  console.log(slug);
+  const recipeId = params.slug;
+  console.log("Recipe slug : ", recipeId);
 
   const [recipe, setRecipe] = useState<null | IRecipe>(null);
 
   useEffect(() => {
+    if (!recipeId) return;
+
     console.log("recipepage");
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
-          `https://orecipesapi.onrender.com/api/recipes/${slug}`
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`
         );
-        const recipeFromAPI = response.data;
+        const recipeFromAPI = response.data.meals[0];
         setRecipe(recipeFromAPI);
         console.log(recipeFromAPI);
       } catch (erreur) {
@@ -27,7 +29,7 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
     };
 
     fetchRecipe();
-  }, [params]);
+  }, [recipeId]);
 
   if (!recipe) {
     return (
@@ -44,32 +46,14 @@ export default function RecipePage({ isLoading }: { isLoading: boolean }) {
       <div className="recipe-container">
         <img
           className="recipe-page-img"
-          src={recipe.thumbnail}
-          alt={recipe.thumbnail}
+          src={recipe.strMealThumb}
+          alt={recipe.strMeal}
         />
-        <h3 className="recipe-page-title">{recipe.title}</h3>
-        <p className="recipe-infos">
-          {recipe.author} - {recipe.difficulty}
-        </p>
+        <h3 className="recipe-page-title">{recipe.strMeal}</h3>
+
         <div className="ingredients">
-          <ul className="ingredients-list">
-            {recipe.ingredients.map((ingredient) => (
-              <li key={ingredient.id} className="ingredients-list-item">
-                <p className="ingredient-quantity">
-                  {ingredient.quantity} {ingredient.unit}
-                </p>
-                <p className="ingredient-name">{ingredient.name}</p>
-              </li>
-            ))}
-          </ul>
+          <ul className="ingredients-list">{recipe.strInstructions}</ul>
         </div>
-        <ul>
-          {recipe.instructions.map((instruction) => (
-            <li key={instruction} className="instructions">
-              {instruction}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

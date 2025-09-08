@@ -8,8 +8,7 @@ header {
 }
 
 .logo {
-  width: 4.5rem;
-  height: 4.5rem;
+  height: 4rem;
   transition: all 0.3s ease;
   filter: drop-shadow(0 4px 8px rgba(44, 62, 80, 0.1));
 }

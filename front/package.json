@@ -1,5 +1,5 @@
 {
-  "name": "orecipes",
+  "name": "myrecipes",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,9 +20,11 @@
     "@fontsource/roboto": "^5.2.6",
     "@mui/material": "^7.3.2",
     "axios": "^1.11.0",
+    "dotenv": "^17.2.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router": "^7.8.2"
+    "react-router": "^7.8.2",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",

@@ -64,18 +64,17 @@ export default function FavRecipesPage() {
           </div>
         ) : (
           favoritesRecipes.map((recipe) => (
-            <article key={recipe.id}>
+            <article key={recipe.idMeal}>
               <img
                 className="article-img"
-                src={recipe.thumbnail}
-                alt={recipe.title}
+                src={recipe.strMealThumb}
+                alt={recipe.strMeal}
               />
-              <h3 className="article-title">{recipe.title}</h3>
-              <p className="article-level">Difficulté : {recipe.difficulty}</p>
+              <h3 className="article-title">{recipe.strMeal}</h3>
 
               <button
                 className="article-show-btn"
-                onClick={() => navigate(`/recipes/${recipe.slug}`)}
+                onClick={() => navigate(`/recipes/${recipe.idMeal}`)}
               >
                 Voir la recette
               </button>

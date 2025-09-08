@@ -12,6 +12,7 @@ import Recipes from "../Recipes/Recipes";
 import ErrorPage from "../../pages/ErrorPage";
 import RecipePage from "../../pages/RecipePage";
 import FavRecipesPage from "../../pages/FavRecipesPage";
+import RecipeByZonePage from "../../pages/RecipeByZonePage";
 import type IRecipe from "../../@types/recipes";
 import { useUserContext } from "../../context/userContext";
 
@@ -19,20 +20,22 @@ function App() {
   const [recipes, setRecipesList] = useState<IRecipe[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // 6 recettes randoms
   useEffect(() => {
-    const fetchRecipes = async () => {
+    const fetchRandomRecipes = async () => {
       try {
-        const response = await axios.get(
-          "https://orecipesapi.onrender.com/api/recipes"
+        const requests = Array.from({ length: 6 }, () =>
+          axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
         );
-        const recipesFromAPI = response.data;
+        const responses = await Promise.all(requests);
+        const recipesFromAPI = responses.map((res) => res.data.meals[0]);
         setRecipesList(recipesFromAPI);
-      } catch (erreur) {
-        console.log("Erreur, les recettes n'ont pas pu être récupérés...");
+      } catch (error) {
+        console.log("Erreur, impossible de charger les recettes");
       }
       setIsLoading(false);
     };
-    fetchRecipes();
+    fetchRandomRecipes();
   }, []);
 
   // récuper isLogged dans le context
@@ -40,7 +43,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Menu recipes={recipes} />
+      <Menu />
       <div className="recipes">
         <div className="recipes-container">
           <Header />
@@ -49,6 +52,7 @@ function App() {
               path="/"
               element={<Recipes recipes={recipes} isLoading={isLoading} />}
             />
+            <Route path="/area/:zone" element={<RecipeByZonePage />} />
             {isLogged && (
               <Route path="/favorites" element={<FavRecipesPage />} />
             )}

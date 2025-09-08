@@ -1,16 +1,21 @@
 import "./Menu.css";
 
-import type IRecipe from "../../@types/recipes";
 import { NavLink } from "react-router";
 import { useUserContext } from "../../context/userContext";
 
 import save from "../../assets/save.svg";
 
-interface IRecipes {
-  recipes: IRecipe[];
-}
+const zones = [
+  "British",
+  "French",
+  "Italian",
+  "Indian",
+  "Japanese",
+  "Mexican",
+  "Moroccan",
+];
 
-export default function Menu({ recipes }: IRecipes) {
+export default function Menu() {
   const { isLogged } = useUserContext();
 
   return (
@@ -29,9 +34,9 @@ export default function Menu({ recipes }: IRecipes) {
           </li>
         )}
 
-        {recipes.map((recipe) => (
-          <li key={recipe.id} className="menu-list-item">
-            <NavLink to={`/recipes/${recipe.slug}`}>{recipe.title}</NavLink>
+        {zones.map((zone) => (
+          <li key={zone} className="menu-list-item">
+            <NavLink to={`/area/${zone}`}>{zone}</NavLink>
           </li>
         ))}
       </ul>
